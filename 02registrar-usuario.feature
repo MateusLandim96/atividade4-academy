@@ -4,16 +4,20 @@ Desejo registrar informações de usuário
 Para poder manipular estas informações livremente
 
     Background:
-    * def payload = {name: "Mateus", email: "maateuuus@hotmail.com"}    
+    * def payload = {name: "Maaateus", email: "maaaateuuus@hotmail.com"}    
     Given url baseUrl
     And path "users"
 
      Scenario: Cadastrar Usuário
+        Given request payload
         When method post
         Then status 201
-        And match response contains {id: "#(response.id)", name: "Mateus", email: "maateuuus@hotmail.com", createdAt: "#string", updatedAt: "#string"}
+        And match response contains {id: "#(response.id)", name: "Maaateus", email: "maaaateuuus@hotmail.com", createdAt: "#string", updatedAt: "#string"}
         * def userId = response.id
-        * def deletar = call read("hook.feature@deletarUsuario")
+        And path "users", userId
+        When method delete
+        Then status 204    
+        
 
     @ignore
     Scenario: Cadastrar usuário com email inválido
