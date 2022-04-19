@@ -5,7 +5,7 @@ Feature: Encontrar um usuário por ID
 
     Scenario: Encontrar usuário por id
         Given url baseUrl
-        And path "users/0ea55b8b-3827-4609-9675-efcf50a15ad9"
+        And path "users/"
         When method get
         Then status 200
         And match response contains {id: "#string", name: "Mateuss", email: "landim.b@gmail.com", createdAt: "#string", updatedAt: "#string"}
