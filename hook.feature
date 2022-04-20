@@ -1,16 +1,12 @@
 Feature: Hook
 
-    @criarUsuario
-    Scenario: Registra um novo usuário
-       Given url baseUrl
-       And path "users"
-        And request {name: "Mateus", email: "maateuuus@hotmail.com"}    
+    Scenario: Criar Usuário
+        * def userName = "landim" + java.util.UUID.randomUUID()
+        * def userEmail = java.util.UUID.randomUUID() + "@hotmail.com"
+        * def payload = read("payloadUser.json")
+    
+        Given url baseUrl
+        And path "users"
+        And request payload
         When method post
         Then status 201
-
-    @deletarUsuario
-    Scenario: deletar um novo usuario
-       Given url baseUrl 
-        And path "users", payload
-        When method delete
-        Then status 204    

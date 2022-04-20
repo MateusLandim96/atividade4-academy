@@ -4,7 +4,7 @@ Feature: Lista de usuários
     Para ter as informações de todos os usuários
 
     Scenario: Listar usuários cadastrados 
-        * def abacate = call read("hook.feature@criarUsuario")
+        * def abacate = call read("hook.feature")
         Given url baseUrl
         And path "users"
         When method get

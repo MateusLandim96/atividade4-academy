@@ -3,14 +3,26 @@ Feature: Encontrar um usuário por ID
     Desejo consultar os dados de um usuário
     Para visualizar as informações deste usuário
 
-    Scenario: Encontrar usuário por id
+    Scenario: Buscar usuário por ID
+        * def userName = "Mateus Abacate" + java.util.UUID.randomUUID()
+        * def userEmail = java.util.UUID.randomUUID() + "@gmail.com"
+        * def payload = read("payloadUser.json")
         Given url baseUrl
-        And path "users/"
+        And path "users"
+        And request payload
+        When method post
+        Then status 201
+        * def idResponse = response.id 
+        
+        #Buscar usuário criado
+        Given url baseUrl
+        And path "users", idResponse
         When method get
         Then status 200
-        And match response contains {id: "#string", name: "Mateuss", email: "landim.b@gmail.com", createdAt: "#string", updatedAt: "#string"}
 
-    Scenario: Encontrar usuário por id inválido
+    Scenario: Usuário não localizado      
         Given url baseUrl
-        And path "users/1a9e2197-a43b-44bf-acec-e114248ec647"    
+        And path "users", java.util.UUID.randomUUID()
+        When method get
+        Then status 404
         
