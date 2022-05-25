@@ -1,3 +1,4 @@
+@ignore
 Feature: Hook
 
     Scenario: Criar Usuário
